@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 4306,
+            "driver": "MySQL",
+            "name": "draftosaurus",
+            "database": "draftosaurus",
+            "username": "draftosaurus"
+        }
+    ]
+}
