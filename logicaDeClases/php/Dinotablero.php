@@ -91,7 +91,7 @@
 
         foreach($tablero->obtenerHistorial() as $resultado) 
         {
-        echo "{$resultado['fecha']}: {$resultado['zona']}\n";
+            echo "{$resultado['fecha']}: {$resultado['zona']}\n";
         }
     }
 
