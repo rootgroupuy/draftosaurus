@@ -1,0 +1,119 @@
+# Documentación del Proyecto Draftosaurus
+
+Este documento detalla la lógica y funcionalidad de las clases y métodos principales del proyecto Draftosaurus, ubicado en `src/app/models/`.
+
+## 1. Clase `Dinobolsa`
+
+**Ubicación:** `src/app/models/Dinobolsa.php`
+
+**Descripción:** Esta clase representa la bolsa de dinosaurios de donde los jugadores "draftan" sus dinosaurios. Contiene la lógica para inicializar la bolsa con dinosaurios aleatorios y gestionar el tamaño de la bolsa según el número de jugadores.
+
+### Métodos:
+
+- `__construct()`:
+  - **Lógica:** Constructor de la clase. Inicializa la bolsa de dinosaurios. Determina el tamaño de la bolsa llamando a `usersPlaying()` y luego llena la bolsa con dinosaurios de tipos aleatorios utilizando `getRandomDinosaur()`.
+  - **Función:** Prepara la bolsa de dinosaurios para el inicio del juego.
+
+- `usersPlaying(): int`:
+  - **Lógica:** Calcula el tamaño de la bolsa de dinosaurios (`$BAG_SIZE`) basándose en el número estático de usuarios (`self::$users`). Actualmente, soporta 2, 3, 4 y 5 jugadores (dictado segun la letra del proyecto), asignando un tamaño de bolsa específico para cada cantidad.
+  - **Función:** Define la capacidad de la bolsa de dinosaurios según la cantidad de jugadores en la partida.
+
+- `getRandomDinosaur(): string`:
+  - **Lógica:** Selecciona aleatoriamente un tipo de dinosaurio del array `DINOSAUR_TYPES`.
+  - **Función:** Proporciona un tipo de dinosaurio al azar para llenar la bolsa.
+
+- `printBag(): void`:
+  - **Lógica:** Itera sobre el array `$bag` e imprime el contenido de la bolsa de dinosaurios en la consola.
+  - **Función:** Muestra visualmente los dinosaurios que se encuentran en la bolsa.
+
+## 2. Clase `Dinodado`
+
+**Ubicación:** `src/app/models/Dinodado.php`
+
+**Descripción:** Esta clase simula un dado con caras predefinidas que representan diferentes zonas o efectos en el juego Draftosaurus.
+
+### Métodos:
+
+- `__construct()`:
+  - **Lógica:** Constructor de la clase. Al instanciar un `Dinodado`, automáticamente realiza una tirada inicial llamando a `roll()`.
+  - **Función:** Inicializa el dado y establece su primera cara.
+
+- `roll(): void`:
+  - **Lógica:** Selecciona aleatoriamente una de las caras definidas en `DICE_TYPES` y la asigna a `$this->currentFace`.
+  - **Función:** Simula la tirada del dado, determinando la cara resultante.
+
+- `getCurrentFace(): string`:
+  - **Lógica:** Retorna el valor de la cara actual del dado (`$this->currentFace`).
+  - **Función:** Permite obtener el resultado de la última tirada del dado.
+
+- `__toString(): string`:
+  - **Lógica:** Método mágico que define cómo se representa el objeto `Dinodado` como una cadena de texto. Retorna una cadena que indica la cara resultante.
+  - **Función:** Facilita la impresión directa del estado del dado.
+
+## 3. Clase `Dinomano`
+
+**Ubicación:** `src/app/models/Dinomano.php`
+
+**Descripción:** Esta clase gestiona los dinosaurios que cada jugador tiene en su "mano" o asignados para ser colocados en el tablero. Asegura que cada usuario tenga la cantidad correcta de dinosaurios.
+
+### Métodos:
+
+- `__construct()`:
+  - **Lógica:** Inicializa el array `$dinosaurios` como un array vacío. Este array almacenará los dinosaurios asignados a cada usuario, indexados por `idUsuario`.
+  - **Función:** Prepara la estructura para almacenar los dinosaurios de los jugadores.
+
+- `asignarDinosaurios(int $idUsuario, array $dinosauriosAsignados): bool`:
+  - **Lógica:** Asigna un array de dinosaurios (`$dinosauriosAsignados`) a un `$idUsuario` específico. Primero, verifica que la cantidad de dinosaurios asignados sea igual a `$maxDinosauriosPorUsuario` (6). Si no, retorna `false`.
+  - **Función:** Permite dar un conjunto de dinosaurios a un jugador, validando la cantidad.
+
+- `obtenerDinosauriosUsuario(int $idUsuario): array|null`:
+  - **Lógica:** Retorna el array de dinosaurios asignados a un `$idUsuario` dado. Si el usuario no tiene dinosaurios asignados, retorna `null`.
+  - **Función:** Recupera los dinosaurios que un jugador tiene en su mano.
+
+- `limpiarDinosauriosUsuario(int $idUsuario): void`:
+  - **Lógica:** Elimina la entrada correspondiente a un `$idUsuario` del array `$dinosaurios`, si existe.
+  - **Función:** Quita todos los dinosaurios asignados a un jugador.
+
+- `verificarCantidadDinosaurios(int $idUsuario): bool`:
+  - **Lógica:** Verifica si un `$idUsuario` tiene dinosaurios asignados y si la cantidad de estos coincide con `$maxDinosauriosPorUsuario`.
+  - **Función:** Comprueba si un jugador tiene la cantidad correcta de dinosaurios en su mano.
+
+## 4. Clase `Dinotablero`
+
+**Ubicación:** `src/app/models/Dinotablero.php`
+
+**Descripción:** Esta clase gestiona la lógica relacionada con el tablero de juego, incluyendo la determinación de la zona de colocación de dinosaurios basada en la tirada de un dado y el mantenimiento de un historial de jugadas.
+
+### Métodos:
+
+- `__construct()`:
+  - **Lógica:** Constructor de la clase. Inicializa el array `$historial` como vacío. Está preparado para futuras inicializaciones si fueran necesarias.
+  - **Función:** Prepara el tablero para el juego y el registro de historial.
+
+- `guardarResultado(string $zona): void`:
+  - **Lógica:** Crea un array `$resultado` con la zona determinada y la fecha/hora actual. Añade este resultado al principio del array `$historial` (`array_unshift`). Si el historial excede `$maxHistorialEntries` (10), elimina la entrada más antigua (`array_pop`).
+  - **Función:** Registra cada jugada del dado en un historial limitado.
+
+- `obtenerHistorial(): array`:
+  - **Lógica:** Retorna el array completo `$historial` de jugadas registradas.
+  - **Función:** Permite acceder al registro de las últimas tiradas del dado y sus resultados.
+
+- `zonasTablero(): string`:
+  - **Lógica:** Instancia un `Dinodado`, lo lanza (`$dice->roll()`) y obtiene la cara resultante (`$dice->getCurrentFace()`). Utiliza una estructura `switch` para interpretar la cara del dado y determinar la regla de colocación de dinosaurios en el tablero. Finalmente, guarda el resultado en el historial y lo retorna.
+  - **Función:** Simula la tirada del dado de zona y devuelve la regla de colocación correspondiente para la ronda actual.
+
+## 5. Archivo `conexion.php`
+
+**Ubicación:** `src/app/models/conexion.php`
+
+**Descripción:** Este archivo es responsable de establecer la conexión a la base de datos MySQL/MariaDB utilizando PDO. Contiene las credenciales de conexión y maneja posibles errores durante el proceso.
+
+### Lógica:
+
+- **Variables de Conexión:** Define `$host`, `$db`, `$user`, y `$pass` para la configuración de la base de datos.
+- **Bloque `try-catch`:** Intenta establecer una nueva conexión PDO a la base de datos `draftosaurus`. Configura el modo de error de PDO para lanzar excepciones en caso de problemas.
+- **Manejo de Errores:** Si la conexión falla (se lanza una `PDOException`), el bloque `catch` captura la excepción y termina la ejecución del script, mostrando un mensaje de error detallado.
+
+### Función:
+
+- Proporciona una conexión a la base de datos que puede ser incluida y utilizada por otras partes de la aplicación para interactuar con la información del juego.
