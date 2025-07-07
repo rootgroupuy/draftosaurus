@@ -1,17 +1,23 @@
 {
-    "sqltools.connections": [
+    "sqltools.connections": 
+    [
         {
-            "mysqlOptions": {
+            "mysqlOptions": 
+            {
                 "authProtocol": "default",
                 "enableSsl": "Disabled"
             },
+            "protocol": "tcp",
+            "host": "localhost",
+            "socketPath": "",
             "previewLimit": 50,
             "server": "localhost",
             "port": 4306,
             "driver": "MySQL",
-            "name": "draftosaurus",
-            "database": "draftosaurus",
-            "username": "draftosaurus"
+            "name": "draftosaurusDBenLocalHost",
+            "database": "draftosaurusDB",
+            "username": "root",
+            "password": ""
         }
     ]
 }
