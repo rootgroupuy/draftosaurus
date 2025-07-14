@@ -1,369 +1,319 @@
 <!DOCTYPE @facebookdeveloper.altIgnacioMoreiraUy>
+<!-- Define el tipo de documento y un atributo personalizado para Facebook developer -->
+
 <html lang="en, es, de, pt">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Draftosaurus | RootGroup</title>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../../public/assets/css/fondo.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap");
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "Fredoka", sans-serif;
-        background-color: #385bad;
-        height: 100vh;
-        overflow: hidden;
-        position: relative;
-        color: white;
-      }
-    </style>
-  </head>
+<!-- Idiomas soportados por el HTML: inglés, español, alemán y portugués -->
 
-  <cite>©RootGroup</cite>
+<head>
+  <meta charset="UTF-8" />
+  <!-- Codificación de caracteres para soportar acentos y símbolos especiales -->
 
-  <body>
-    <div class="grid"></div>
-    <div class="vignette"></div>
-    <div class="content">
-      <div id="startScreen">
-        <div id="logoContainer">
-          <img
-            src="../../public/assets/img/logo.png"
-            alt="Logo Draftosaurus"
-            class="logo"
-          />
-        </div>
-        <div
-          id="buttonsContainer"
-          class="d-flex flex-column align-items-center"
-        >
-          <img
-            src="../../public/assets/img/btnfacebook.png"
-            alt="Facebook Login"
-            class="custom-btn-img"
-            onclick="window.location.href='facebook.html'"
-          />
-          <img
-            src="../../public/assets/img/btninvitado.png"
-            alt="Play as Guest"
-            class="custom-btn-img"
-            onclick="playAsGuest()"
-          />
-        </div>
+  <title> Draftosaurus | RootGroup </title>
+  <!-- Título de la pestaña del navegador -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Hace que el sitio sea responsive en móviles -->
+
+  <link rel="stylesheet" href="../../public/assets/css/fondo.css">
+  <!-- Enlace a tu hoja de estilos de fondo personalizada -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Carga Bootstrap para estilos rápidos y responsivos -->
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+    /* Fuente personalizada Fredoka desde Google Fonts */
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+      background-color: #385bad;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      color: white;
+    }
+    /* Estilo general del cuerpo de la página */
+  </style>
+</head>
+
+<body>
+  <div class="grid"></div>
+  <!-- Contenedor para los puntos de fondo animado (se llena con JS) -->
+
+  <div class="vignette"></div>
+  <!-- Capa de viñeta visual (oscurecimiento de bordes, efecto visual) -->
+
+  <div class="content">
+    <!-- Contenedor principal de todo el contenido -->
+
+    <div id="startScreen">
+      <!-- Pantalla inicial con botones de acceso -->
+
+      <div id="logoContainer">
+        <img src="../../public/assets/img/logo.png" alt="Logo Draftosaurus" class="logo" />
+        <!-- Muestra el logo del juego -->
       </div>
 
-      <div id="languageScreen" style="display: none">
-        <div
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            height: 100vh;
-            padding-top: 160px;
-          "
-        >
-          <img
-            src="../../public/assets/img/logo.png"
-            alt="Logo Draftosaurus"
-            class="logo"
-            style="max-width: 200px; width: 100%; margin-bottom: 25px"
-          />
-          <p
-            id="lang-title"
-            style="
-              font-size: 14px;
-              font-weight: 400;
-              margin-bottom: 20px;
-              color: white;
-            "
-          >
-            Por favor elige tu idioma :
-          </p>
+      <div id="buttonsContainer" class="d-flex flex-column align-items-center">
+        <!-- Contenedor de los botones de acceso -->
 
-          <div
-            class="language-buttons"
-            style="
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: center;
-              gap: 10px;
-              max-width: 320px;
-            "
-          >
-            <button onclick="setLanguage('es')">Español</button>
-            <button onclick="setLanguage('en')">English</button>
-            <button onclick="setLanguage('pt')">Português</button>
-            <button onclick="setLanguage('de')">Deutsch</button>
-          </div>
-        </div>
-      </div>
+        <img src="../../public/assets/img/btnfacebook.png" alt="Facebook Login" class="custom-btn-img" onclick="window.location.href='facebook.html'" />
+        <!-- Botón de login con Facebook que redirige a otra página -->
 
-      <div id="configScreen">
-        <h2 id="config-title">Game Configuration</h2>
-        <label for="numPlayers" id="player-count-label">Number of Players:</label>
-        
-        <input
-          type="number"
-          id="numPlayers"
-          min="2"
-          max="5"
-          class="form-control w-50 mx-auto"
-          onchange="generatePlayerFields()"
-        />
-        <div id="playerInputs" class="mt-3"></div>
-        <button
-          id="confirmBtn"
-          class="btn btn-success mt-3"
-          onclick="confirmConfig()"
-        >
-          Confirm
-        </button>
-      </div>
-      <div class="text-center mt-4">
-        <img
-          src="../../public/assets/img/logo.png"
-          alt="Logo Draftosaurus"
-          class="logo"
-          style="max-width: 300px"
-        />
+        <img src="../../public/assets/img/btninvitado.png" alt="Play as Guest" class="custom-btn-img" onclick="playAsGuest()" />
+        <!-- Botón para jugar como invitado, llama función de JS -->
       </div>
     </div>
 
-    <script>
-      const translations = {
-        es: {
-          confirm: "Confirmar",
-          start: "Iniciar sesión con Facebook",
-          guest: "Jugar como invitado",
-          selectLang: "Selecciona tu idioma",
-          configTitle: "Configuración de Partida",
-          players: "Cantidad de Jugadores:",
-          alertTerms: `Aviso: Al tocar 'Ok', aceptas los <a class="terms-link" href="https://moonfroglabs.com/terms-of-service/" target="_blank">Términos y Condiciones</a> y confirmas haber leído la <a class="terms-link" href="https://moonfroglabs.com/privacy-policy-2/" target="_blank">Política de Privacidad</a>.`,
-          ok: "Ok",
-          playerPlaceholder: "Jugador",
-          errorPlayers: "¡Debes ingresar entre 2 y 5 jugadores!",
-          errorNames:
-            "¡Debes colocar los nombres de los participantes para poder jugar!",
-          invalidInput: "¡Solo se permiten números entre 2 y 5!",
-        },
-        en: {
-          confirm: "Confirm",
-          start: "Login with Facebook",
-          guest: "Play as Guest",
-          selectLang: "Please select your language",
-          configTitle: "Game Configuration",
-          players: "Number of Players:",
-          alertTerms: `Aviso: Clickeando 'Ok', estarías aceptando nuestros <a class="terms-link" href="https://moonfroglabs.com/terms-of-service/" target="_blank">Términos y Condiciones</a> y confirmando que has leído nuestras <a class="terms-link" href="https://moonfroglabs.com/privacy-policy-2/" target="_blank">Políticas de Privacidad</a>.`,
-          ok: "Ok",
-          playerPlaceholder: "Player",
-          errorPlayers: "You must enter between 2 and 5 players!",
-          errorNames: "You must fill in the player names to continue!",
-          invalidInput: "Only numbers between 2 and 5 are allowed!",
-        },
-        pt: {
-          confirm: "Aceitar",
-          start: "Entrar com Facebook",
-          guest: "Jogar como convidado",
-          selectLang: "Selecione seu idioma",
-          configTitle: "Configuração do Jogo",
-          players: "Número de jogadores:",
-          alertTerms: `Aviso: Ao tocar em 'Ok', você aceita os <a class="terms-link" href="https://moonfroglabs.com/terms-of-service/" target="_blank">Termos e Condições</a> e confirma que leu a <a class="terms-link" href="https://moonfroglabs.com/privacy-policy-2/" target="_blank">Política de Privacidade</a>.`,
-          ok: "Ok",
-          playerPlaceholder: "Jogador",
-          errorPlayers: "Você deve inserir entre 2 e 5 jogadores!",
-          errorNames:
-            "Você deve preencher os nomes dos jogadores para continuar!",
-          invalidInput: "Apenas números entre 2 e 5 são permitidos!",
-        },
-        de: {
-          confirm: "Bestätigen",
-          start: "Mit Facebook einloggen",
-          guest: "Als Gast spielen",
-          selectLang: "Sprache wählen",
-          configTitle: "Spielkonfiguration",
-          players: "Anzahl der Spieler:",
-          alertTerms: `Hinweis: Durch Tippen auf 'Ok' akzeptieren Sie die <a class="terms-link" href="https://moonfroglabs.com/terms-of-service/" target="_blank">AGB</a> und bestätigen, dass Sie die <a class="terms-link" href="https://moonfroglabs.com/privacy-policy-2/" target="_blank">Datenschutzrichtlinie</a> gelesen haben.`,
-          ok: "Ok",
-          playerPlaceholder: "Spieler",
-          errorPlayers: "Sie müssen zwischen 2 und 5 Spielern eingeben!",
-          errorNames:
-            "Sie müssen die Namen der Spieler eingeben, um fortzufahren!",
-          invalidInput: "Nur Zahlen zwischen 2 und 5 erlaubt!",
-        },
-      };
+    <div id="languageScreen" style="display: none;">
+      <!-- Pantalla de selección de idioma, se muestra después -->
 
-      let currentLang = "en";
-      let alertShown = false;
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100vh; padding-top: 160px;">
+        <!-- Centrado vertical con padding -->
 
-      function showAlert(msg, buttonText) {
-        const existing = document.querySelector(".custom-modal");
-        if (existing) existing.remove();
+        <img src="../../public/assets/img/logo.png" alt="Logo Draftosaurus" class="logo" style="max-width: 200px; width: 100%; margin-bottom: 25px;" />
+        <!-- Logo nuevamente -->
 
-        const wrapper = document.createElement("div");
-        wrapper.className = "custom-modal";
-        wrapper.innerHTML = `
-    <div class="modal fade show" tabindex="-1" style="display: block; background: rgba(0,0,0,0.5); z-index: 9999;">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center p-3">
-          <div class="modal-body">
-            <p>${msg}</p>
-            <button class="btn mt-2" id="alertOk">${buttonText}</button>
-          </div>
+        <p id="lang-title" style="font-size:14px; font-weight:400; margin-bottom:20px; color:white;">
+          Por favor elige tu idioma :
+        </p>
+        <!-- Título de idioma (se actualiza con traducción JS) -->
+
+        <div class="language-buttons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 320px;">
+          <!-- Botones de idiomas disponibles -->
+          <button onclick="setLanguage('es')">Español</button>
+          <button onclick="setLanguage('en')">English</button>
+          <button onclick="setLanguage('pt')">Português</button>
+          <button onclick="setLanguage('de')">Deutsch</button>
         </div>
       </div>
-    </div>`;
-        document.body.appendChild(wrapper);
-        document.getElementById("alertOk").onclick = () => wrapper.remove();
-      }
-
-      function loginWithFacebook() {
-        if (!alertShown) {
-          showAlert(
-            translations[currentLang].alertTerms,
-            translations[currentLang].ok
-          );
-          return;
-        }
-
-        const modal = document.getElementById("facebookLoginModal");
-        modal.style.display = "flex";
-
-        setTimeout(() => {
-          modal.style.display = "none";
-          window.location.href = "partida2.html";
-        }, 2000);
-      }
-
-      function playAsGuest() {
-        document.getElementById("startScreen").style.display = "none";
-        document.getElementById("languageScreen").style.display = "block";
-      }
-
-      function setLanguage(lang) {
-        currentLang = lang;
-        document.getElementById("lang-title").innerText =
-          translations[lang].selectLang;
-        document.getElementById("config-title").innerText =
-          translations[lang].configTitle;
-        document.getElementById("player-count-label").innerText =
-          translations[lang].players;
-
-        const confirmBtn = document.getElementById("confirmBtn");
-        if (confirmBtn) {
-          confirmBtn.innerText = translations[lang].confirm;
-        }
-
-        document.getElementById("languageScreen").style.display = "none";
-        document.getElementById("configScreen").style.display = "block";
-      }
-
-      function generatePlayerFields() {
-        const num = parseInt(document.getElementById("numPlayers").value);
-        const container = document.getElementById("playerInputs");
-        container.innerHTML = "";
-
-        if (isNaN(num) || num < 2 || num > 5) {
-          // Cambia esta línea:
-          // showAlert(translations[currentLang].errorPlayers, translations[currentLang].ok);
-          showAlert(
-            translations[currentLang].errorPlayers,
-            translations[currentLang].ok
-          );
-          return;
-        }
-
-        for (let i = 1; i <= num; i++) {
-          const input = document.createElement("input");
-          input.type = "text";
-          input.maxLength = 16;
-          input.placeholder = `${translations[currentLang].playerPlaceholder} ${i}`;
-          input.className = "form-control mb-2";
-          container.appendChild(input);
-        }
-      }
-
-      function confirmConfig() {
-        const num = parseInt(document.getElementById("numPlayers").value);
-        if (isNaN(num) || num < 2 || num > 5) {
-          // Cambia esta línea:
-          // alert(translations[currentLang].errorPlayers);
-          showAlert(
-            translations[currentLang].errorPlayers,
-            translations[currentLang].ok
-          );
-          return;
-        }
-
-        const inputs = document.querySelectorAll("#playerInputs input");
-        for (let input of inputs) {
-          if (!input.value.trim() || input.value.length > 16) {
-            showAlert(
-              translations[currentLang].errorNames,
-              translations[currentLang].ok
-            );
-            return;
-          }
-        }
-
-        window.location.href = "partida2.html";
-      }
-
-      window.onload = function () {
-        showAlert(
-          translations[currentLang].alertTerms,
-          translations[currentLang].ok
-        );
-      };
-
-      const grid = document.querySelector(".grid");
-      const cols = 20,
-        rows = 30;
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const dot = document.createElement("div");
-          dot.className = `dot col-${c} row-${r}`;
-          grid.appendChild(dot);
-        }
-      }
-    </script>
-
-    <div
-      id="facebookLoginModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 9999;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <div
-        style="
-          background: white;
-          color: black;
-          padding: 30px;
-          border-radius: 10px;
-          max-width: 300px;
-          text-align: center;
-          font-family: 'Fredoka', sans-serif;
-        "
-      >
-        <h5 style="margin-bottom: 20px">Connecting to Facebook...</h5>
-        <div class="spinner-border text-primary" role="status"></div>
-        <p style="margin-top: 15px">Please wait</p>
-      </div>
     </div>
-  </body>
+
+    <div id="configScreen">
+      <!-- Pantalla de configuración de partida -->
+
+      <h2 id="config-title">Game Configuration</h2>
+      <!-- Título de la pantalla, traducido dinámicamente -->
+
+      <label for="numPlayers" id="player-count-label">Number of Players:</label>
+      <!-- Etiqueta para el campo de número de jugadores -->
+
+      <input type="number" id="numPlayers" min="2" max="5" class="form-control w-50 mx-auto" onchange="generatePlayerFields()" />
+      <!-- Campo de número para ingresar cuántos jugadores participan (2 a 5) -->
+
+      <div id="playerInputs" class="mt-3"></div>
+      <!-- Aquí se generan los campos para escribir nombres de jugadores -->
+
+      <button id="confirmBtn" class="btn btn-success mt-3" onclick="confirmConfig()">Confirm</button>
+      <!-- Botón para confirmar la configuración e iniciar el juego -->
+    </div>
+
+    <div class="text-center mt-4">
+      <!-- Repetición del logo final debajo de la configuración -->
+      <img src="../../public/assets/img/logo.png" alt="Logo Draftosaurus" class="logo" style="max-width: 300px;" />
+    </div>
+  </div>
+
+  <script>
+    // Objeto con las traducciones por idioma
+    const translations = {
+      es: {
+        confirm: "Confirmar",
+        start: "Iniciar sesión con Facebook",
+        guest: "Jugar como invitado",
+        selectLang: "Selecciona tu idioma",
+        configTitle: "Configuración de Partida",
+        players: "Cantidad de Jugadores:",
+        alertTerms: `Aviso: Al tocar 'Ok', aceptas los <a class="terms-link" href="https://moonfroglabs.com/terms-of-service/" target="_blank">Términos y Condiciones</a> y confirmas haber leído la <a class="terms-link" href="https://moonfroglabs.com/privacy-policy-2/" target="_blank">Política de Privacidad</a>.`,
+        ok: "Ok",
+        playerPlaceholder: "Jugador",
+        errorPlayers: "¡Debes ingresar entre 2 y 5 jugadores!",
+        errorNames: "¡Debes colocar los nombres de los participantes para poder jugar!",
+        invalidInput: "¡Solo se permiten números entre 2 y 5!"
+      },
+      // Traducciones en inglés
+      en: {
+        confirm: "Confirm",
+        start: "Login with Facebook",
+        guest: "Play as Guest",
+        selectLang: "Please select your language",
+        configTitle: "Game Configuration",
+        players: "Number of Players:",
+        alertTerms: `Aviso: Clickeando 'Ok', estarías aceptando nuestros <a class="terms-link" href="https://moonfroglabs.com/terms-of-service/" target="_blank">Términos y Condiciones</a> y confirmando que has leído nuestras <a class="terms-link" href="https://moonfroglabs.com/privacy-policy-2/" target="_blank">Políticas de Privacidad</a>.`,
+        ok: "Ok",
+        playerPlaceholder: "Player",
+        errorPlayers: "You must enter between 2 and 5 players!",
+        errorNames: "You must fill in the player names to continue!",
+        invalidInput: "Only numbers between 2 and 5 are allowed!"
+      },
+      // Portugués
+      pt: {
+        confirm: "Aceitar",
+        start: "Entrar com Facebook",
+        guest: "Jogar como convidado",
+        selectLang: "Selecione seu idioma",
+        configTitle: "Configuração do Jogo",
+        players: "Número de jogadores:",
+        alertTerms: `Aviso: Ao tocar em 'Ok', você aceita os <a class="terms-link" href="https://moonfroglabs.com/terms-of-service/" target="_blank">Termos e Condições</a> e confirma que leu a <a class="terms-link" href="https://moonfroglabs.com/privacy-policy-2/" target="_blank">Política de Privacidade</a>.`,
+        ok: "Ok",
+        playerPlaceholder: "Jogador",
+        errorPlayers: "Você deve inserir entre 2 e 5 jogadores!",
+        errorNames: "Você deve preencher os nomes dos jogadores para continuar!",
+        invalidInput: "Apenas números entre 2 e 5 são permitidos!"
+      },
+      // Alemán
+      de: {
+        confirm: "Bestätigen",
+        start: "Mit Facebook einloggen",
+        guest: "Als Gast spielen",
+        selectLang: "Sprache wählen",
+        configTitle: "Spielkonfiguration",
+        players: "Anzahl der Spieler:",
+        alertTerms: `Hinweis: Durch Tippen auf 'Ok' akzeptieren Sie die <a class="terms-link" href="https://moonfroglabs.com/terms-of-service/" target="_blank">AGB</a> und bestätigen, dass Sie die <a class="terms-link" href="https://moonfroglabs.com/privacy-policy-2/" target="_blank">Datenschutzrichtlinie</a> gelesen haben.`,
+        ok: "Ok",
+        playerPlaceholder: "Spieler",
+        errorPlayers: "Sie müssen zwischen 2 und 5 Spielern eingeben!",
+        errorNames: "Sie müssen die Namen der Spieler eingeben, um fortzufahren!",
+        invalidInput: "Nur Zahlen zwischen 2 und 5 erlaubt!"
+      }
+    };
+
+    let currentLang = 'en'; // Idioma por defecto
+    let alertShown = false; // Controla si se mostró el aviso legal
+
+    function showAlert(msg, buttonText) {
+      // Crea una alerta personalizada modal
+      const existing = document.querySelector('.custom-modal');
+      if (existing) existing.remove();
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'custom-modal';
+      wrapper.innerHTML = `
+        <div class="modal fade show" tabindex="-1" style="display: block; background: rgba(0,0,0,0.5); z-index: 9999;">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-3">
+              <div class="modal-body">
+                <p>${msg}</p>
+                <button class="btn mt-2" id="alertOk">${buttonText}</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      document.body.appendChild(wrapper);
+      document.getElementById("alertOk").onclick = () => wrapper.remove();
+    }
+
+    function loginWithFacebook() {
+      // Simula login con Facebook y redirige
+      if (!alertShown) {
+        showAlert(translations[currentLang].alertTerms, translations[currentLang].ok);
+        return;
+      }
+
+      const modal = document.getElementById("facebookLoginModal");
+      modal.style.display = "flex";
+
+      setTimeout(() => {
+        modal.style.display = "none";
+        window.location.href = "./partida.html";
+      }, 2000);
+    }
+
+    function playAsGuest() {
+      // Oculta pantalla inicial, muestra selección de idioma
+      document.getElementById('startScreen').style.display = 'none';
+      document.getElementById('languageScreen').style.display = 'block';
+    }
+
+    function setLanguage(lang) {
+      // Cambia el idioma actual y actualiza los textos
+      currentLang = lang;
+      document.getElementById("lang-title").innerText = translations[lang].selectLang;
+      document.getElementById("config-title").innerText = translations[lang].configTitle;
+      document.getElementById("player-count-label").innerText = translations[lang].players;
+
+      const confirmBtn = document.getElementById("confirmBtn");
+      if (confirmBtn) {
+        confirmBtn.innerText = translations[lang].confirm;
+      }
+
+      document.getElementById("languageScreen").style.display = 'none';
+      document.getElementById("configScreen").style.display = 'block';
+    }
+
+    function generatePlayerFields() {
+      // Genera inputs de nombre según cantidad de jugadores
+      const num = parseInt(document.getElementById("numPlayers").value);
+      const container = document.getElementById("playerInputs");
+      container.innerHTML = "";
+
+      if (isNaN(num) || num < 2 || num > 5) {
+        showAlert(translations[currentLang].errorPlayers, translations[currentLang].ok);
+        return;
+      }
+
+      for (let i = 1; i <= num; i++) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.maxLength = 16;
+        input.placeholder = `${translations[currentLang].playerPlaceholder} ${i}`;
+        input.className = "form-control mb-2";
+        container.appendChild(input);
+      }
+    }
+
+    function confirmConfig() {
+      // Verifica los nombres y guarda los jugadores
+      const num = parseInt(document.getElementById("numPlayers").value);
+      const inputs = document.querySelectorAll('#playerInputs input');
+
+      if (isNaN(num) || num < 2 || num > 5) {
+        showAlert(translations[currentLang].errorPlayers, translations[currentLang].ok);
+        return;
+      }
+
+      const players = [];
+      for (let i = 0; i < inputs.length; i++) {
+        const name = inputs[i].value.trim();
+        if (!name || name.length > 16) {
+          showAlert(translations[currentLang].errorNames, translations[currentLang].ok);
+          return;
+        }
+        players.push({ name: name });
+      }
+
+      // Guarda en el almacenamiento local y redirige
+      localStorage.setItem('players', JSON.stringify(players));
+      window.location.href = "./partida.html";
+    }
+
+    window.onload = function () {
+      // Muestra términos al cargar
+      showAlert(translations[currentLang].alertTerms, translations[currentLang].ok);
+    };
+
+    // Genera una grilla visual de fondo con puntos (efecto visual)
+    const grid = document.querySelector('.grid');
+    const cols = 20, rows = 30;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const dot = document.createElement('div');
+        dot.className = `dot col-${c} row-${r}`;
+        grid.appendChild(dot);
+      }
+    }
+  </script>
+
+  <!-- Modal que simula conexión con Facebook -->
+  <div id="facebookLoginModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
+    <div style="background:white; color:black; padding:30px; border-radius:10px; max-width:300px; text-align:center; font-family:'Fredoka', sans-serif;">
+      <h5 style="margin-bottom:20px;">Connecting to Facebook...</h5>
+      <div class="spinner-border text-primary" role="status"></div>
+      <p style="margin-top:15px;">Please wait</p>
+    </div>
+  </div>
+</body>
+
 </html>

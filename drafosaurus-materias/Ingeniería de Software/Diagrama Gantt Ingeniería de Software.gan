@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-06-02" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3230" locale="es_ES">
+    <description/>
+    <view zooming-state="default:1" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="200" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="75" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="75" order="2"/>
+        <option id="filter.completedTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="210" order="0"/>
+        <field id="1" name="Función" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+        <date year="2025" month="5" date="12" type="HOLIDAY">
+            <![CDATA[Holiday on 12/5/25 00:00]]>
+        </date>
+        <date year="2025" month="5" date="13" type="HOLIDAY">
+            <![CDATA[Días festivos en 13/5/25 0:00]]>
+        </date>
+        <date year="2025" month="5" date="9" type="HOLIDAY">
+            <![CDATA[Días festivos en 9/5/25 0:00]]>
+        </date>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="6" name="Relevamiento y aplicación de técnicas del curso" color="#8cb6ce" meeting="false" start="2025-05-07" duration="3" complete="0" thirdDate="2025-05-06" thirdDate-constraint="0" expand="true">
+            <depend id="7" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="7" name="Estudio de factibilidad" color="#8cb6ce" meeting="false" start="2025-05-15" duration="1" complete="0" thirdDate="2025-05-06" thirdDate-constraint="0" expand="true">
+            <depend id="8" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="8" name="Definición de roles y permisos" meeting="false" start="2025-05-16" duration="1" complete="0" expand="true"/>
+        <task id="10" name="Lógica de sistema y árboles de decisión" color="#8cb6ce" meeting="false" start="2025-05-21" duration="2" complete="0" thirdDate="2025-05-06" thirdDate-constraint="0" expand="true"/>
+        <task id="16" name="Especificación de requerimientos" color="#8cb6ce" meeting="false" start="2025-05-14" duration="2" complete="0" thirdDate="2025-05-06" thirdDate-constraint="0" expand="true"/>
+        <task id="11" name="Implementación de metodología tradicional" color="#8cb6ce" meeting="false" start="2025-06-24" duration="1" complete="0" thirdDate="2025-05-06" thirdDate-constraint="0" expand="true"/>
+        <task id="12" name="Prototipado (Mock-up y Wireframe)" color="#8cb6ce" meeting="false" start="2025-05-27" duration="3" complete="0" thirdDate="2025-05-06" thirdDate-constraint="0" expand="true"/>
+        <task id="13" name="Documentación inicial y planificación" color="#8cb6ce" meeting="false" start="2025-05-23" duration="2" complete="0" thirdDate="2025-05-06" thirdDate-constraint="0" expand="false"/>
+        <task id="14" name="Creación y configuración de repositorio GitHub" color="#8cb6ce" meeting="false" start="2025-05-29" duration="1" complete="0" thirdDate="2025-05-06" thirdDate-constraint="0" expand="true"/>
+        <task id="15" name="Revisión y ajustes finales para entrega" color="#8cb6ce" meeting="false" start="2025-07-10" duration="1" complete="0" thirdDate="2025-05-06" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>

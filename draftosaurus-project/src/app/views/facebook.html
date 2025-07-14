@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Draftosaurus - Acceso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="fondo.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+      background-color: #f0f2f5;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #facebookScreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #f0f2f5;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .facebook-header {
+      width: 100%;
+      background-color: #3b5998;
+      text-align: center;
+      padding: 14px 0;
+    }
+
+    .facebook-header h1 {
+      color: white;
+      font-size: 30px;
+      margin: 0;
+      font-family: 'Helvetica', sans-serif;
+    }
+
+    .login-box {
+      margin-top: 30px;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 350px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .login-box img {
+      max-width: 100px;
+      margin-bottom: 15px;
+    }
+
+    .login-box p {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .login-box a {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #1877f2;
+      text-decoration: none;
+    }
+
+    .login-box a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="facebookScreen">
+    <div class="facebook-header">
+      <h1>facebook</h1>
+    </div>
+    <div class="login-box">
+      <img src="../../public/assets/img/logo.png" alt="Logo Draftosaurus">
+      <p>Inicia sesión en tu cuenta de Facebook para conectarte con Draftosaurus Mobile</p>
+      <input type="text" id="userInput" placeholder="Número de celular o correo electrónico">
+      <input type="password" id="passwordInput" placeholder="Contraseña de Facebook">
+      <button onclick="validateLogin()">Iniciar sesión</button>
+      <a href="#">¿Olvidaste tu contraseña?</a>
+      <a href="#">Crear cuenta</a>
+      <a href="#">Servicio de ayuda</a>
+    </div>
+  </div>
+
+  <div id="languageScreen" style="display: none;">
+    <!-- Pantalla de selección de idioma -->
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100vh; padding-top: 160px;">
+      <img src="../../public/assets/img/logo.png" alt="Logo Draftosaurus" class="logo" style="max-width: 200px; width: 100%; margin-bottom: 25px;" />
+      <p id="lang-title" style="font-size:14px; font-weight:400; margin-bottom:20px; color:white;">Por favor elige tu idioma : </p>
+      <div class="language-buttons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 320px;">
+        <button onclick="setLanguage('es')">Español</button>
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('pt')">Português</button>
+        <button onclick="setLanguage('de')">Deutsch</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function validateLogin() {
+      const input = document.getElementById("userInput").value.trim();
+      const pass = document.getElementById("passwordInput").value.trim();
+
+      const isPhone = /^09\d{2}\s?\d{3}\s?\d{3}$/.test(input);
+      const isEmail = /^[a-zA-Z0-9._-]+@(gmail|hotmail|ceibal)\.(com|com\.uy|uy)$/.test(input);
+
+      if (!isPhone && !isEmail) {
+        alert("¡Debes ingresar un número válido (ej: 099 123 456) o un correo válido (@gmail, @hotmail, @ceibal.edu)!");
+        return;
+      }
+
+      if (pass.length < 4) {
+        alert("¡Debes ingresar una contraseña válida!");
+        return;
+      }
+
+      // Si pasa validación, va a selección de idioma
+      document.getElementById('facebookScreen').style.display = 'none';
+      document.getElementById('languageScreen').style.display = 'block';
+    }
+
+    function setLanguage(lang) {
+      localStorage.setItem("language", lang);
+      window.location.href = "./partida.html"; // Redirigir a la pantalla de partida
+    }
+  </script>
+
+</body>
+</html>tml>
