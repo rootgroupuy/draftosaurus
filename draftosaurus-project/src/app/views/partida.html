@@ -1,18 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Partida - Prototipo Draftosaurus</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../public/assets/css/fondo.css" />
+  <style>
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #imagenTurno {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
+    }
+
+    #btnSiguiente {
+      font-size: 1.2rem;
+    }
+  </style>
 </head>
 <body>
-    <style>
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+
+  <!-- Fondo de puntitos -->
+  <div class="grid">
+    <!-- Generar 600 puntitos (20 columnas × 30 filas) -->
+    <script>
+      for (let row = 0; row < 30; row++) {
+        for (let col = 0; col < 20; col++) {
+          const dot = document.createElement('div');
+          dot.className = `dot row-${row} col-${col}`;
+          document.write(dot.outerHTML);
         }
-    </style>
-    <img src="../../public/assets/img/tablero.jpeg">
+      }
+    </script>
+  </div>
+  <div class="vignette"></div>
+
+  <!-- Contenido centrado -->
+  <div class="content">
+    <img id="imagenTurno" src="../../public/assets/img/turnojuan1.png" alt="Turno" class="img-fluid">
+    <button id="btnSiguiente" class="btn btn-light btn-lg">
+      <i class="bi bi-arrow-right-circle-fill"></i> Siguiente
+    </button>
+  </div>
+
+  <script>
+    const imagenes = [
+      "../../public/assets/img/turnojuan1.png",
+      "../../public/assets/img/turno-julio1.png",
+      "../../public/assets/img/turno-juan2.png",
+      "../../public/assets/img/turno-julio2.png",
+      "../../public/assets/img/ganador.png"
+    ];
+
+    let indice = 0;
+    const img = document.getElementById("imagenTurno");
+    const btn = document.getElementById("btnSiguiente");
+
+    btn.addEventListener("click", () => {
+      indice++;
+      if (indice < imagenes.length) {
+        img.src = imagenes[indice];
+      } else {
+        btn.disabled = true;
+        btn.innerHTML = "<i class='bi bi-check-circle-fill'></i> Fin";
+      }
+    });
+  </script>
 </body>
 </html>
