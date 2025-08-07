@@ -10,24 +10,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     require_once 'conexion.php';
     try {
-        $conn = getConexion(); // Debe retornar un objeto PDO
-        $conn->beginTransaction();
+        $db = new DatabaseConnection();
+        $pdo = $db->getPdo();
+        $pdo->beginTransaction();
         $inserted = 0;
         foreach ($players as $name) {
-            $stmt = $conn->prepare('INSERT INTO Jugador (nombre) VALUES (:nombre)');
+            $stmt = $pdo->prepare('INSERT INTO Jugador (nombre) VALUES (:nombre)');
             $stmt->bindParam(':nombre', $name);
             if ($stmt->execute()) {
                 $inserted++;
             }
         }
-        $conn->commit();
+        $pdo->commit();
         if ($inserted === count($players)) {
             echo json_encode(['success' => true, 'message' => 'Jugadores guardados correctamente en la base de datos.']);
         } else {
             echo json_encode(['success' => false, 'message' => 'No todos los jugadores se guardaron correctamente.']);
         }
     } catch (Exception $e) {
-        if ($conn && $conn->inTransaction()) $conn->rollBack();
+        if (isset($pdo) && $pdo->inTransaction()) $pdo->rollBack();
         echo json_encode(['success' => false, 'message' => 'Error al guardar jugadores: ' . $e->getMessage()]);
     }
     exit;

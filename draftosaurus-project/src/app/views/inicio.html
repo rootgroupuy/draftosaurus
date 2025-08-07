@@ -64,6 +64,9 @@
 
         <img src="../../public/assets/img/btninvitado.png" alt="Play as Guest" class="custom-btn-img" onclick="playAsGuest()" />
         <!-- Botón para jugar como invitado, llama función de JS -->
+
+        <button class="btn btn-primary mt-3 w-75" onclick="showRegisterModal()">Registrarse</button>
+        <button class="btn btn-secondary mt-2 w-75" onclick="showLoginModal()">Iniciar sesión</button>
       </div>
     </div>
 
@@ -116,7 +119,122 @@
     </div>
   </div>
 
+<!-- Modales globales fuera de .content y startScreen -->
+<div id="registerModal" class="custom-modal" style="display:none;">
+  <div class="modal fade show" tabindex="-1" style="display: block; background: rgba(0,0,0,0.5); z-index: 9999;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-3">
+        <div class="modal-body">
+          <h5>Registrarse</h5>
+          <form onsubmit="event.preventDefault();registerUser();">
+            <input type="text" id="regUsername" class="form-control mb-2" placeholder="Usuario" maxlength="32" autocomplete="username">
+            <input type="password" id="regPassword" class="form-control mb-2" placeholder="Contraseña" maxlength="32" autocomplete="new-password">
+            <button type="submit" class="btn btn-success">Registrar</button>
+            <button type="button" class="btn btn-link" onclick="closeRegisterModal()">Cancelar</button>
+          </form>
+          <div id="regMsg" class="mt-2 text-danger"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="loginModal" class="custom-modal" style="display:none;">
+  <div class="modal fade show" tabindex="-1" style="display: block; background: rgba(0,0,0,0.5); z-index: 9999;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-3">
+        <div class="modal-body">
+          <h5>Iniciar sesión</h5>
+          <form onsubmit="event.preventDefault();loginUser();">
+            <input type="text" id="loginUsername" class="form-control mb-2" placeholder="Usuario" maxlength="32" autocomplete="username">
+            <input type="password" id="loginPassword" class="form-control mb-2" placeholder="Contraseña" maxlength="32" autocomplete="current-password">
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+            <button type="button" class="btn btn-link" onclick="closeLoginModal()">Cancelar</button>
+          </form>
+          <div id="loginMsg" class="mt-2 text-danger"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   <script>
+    // Funciones para mostrar/ocultar modales
+    function showRegisterModal() {
+      const modal = document.getElementById('registerModal');
+      if (modal) {
+        modal.style.display = 'block';
+      } else {
+        alert('Error: El modal de registro no existe en el DOM.');
+      }
+    }
+    function closeRegisterModal() {
+      document.getElementById('registerModal').style.display = 'none';
+      document.getElementById('regMsg').innerText = '';
+    }
+    function showLoginModal() {
+      document.getElementById('loginModal').style.display = 'block';
+    }
+    function closeLoginModal() {
+      document.getElementById('loginModal').style.display = 'none';
+      document.getElementById('loginMsg').innerText = '';
+    }
+
+    // Registro de usuario
+    function registerUser() {
+      const username = document.getElementById('regUsername').value.trim();
+      const password = document.getElementById('regPassword').value.trim();
+      if (!username || !password) {
+        document.getElementById('regMsg').innerText = 'Completa todos los campos.';
+        return;
+      }
+      fetch('http://localhost:8080/draftosaurus-project/src/app/models/registro.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('regMsg').innerText = 'Registro exitoso. Ahora puedes iniciar sesión.';
+        } else {
+          document.getElementById('regMsg').innerText = data.message || 'Error en el registro.';
+        }
+      })
+      .catch(() => {
+        document.getElementById('regMsg').innerText = 'No se pudo conectar con el servidor.';
+      });
+    }
+
+    // Login de usuario
+    function loginUser() {
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      if (!username || !password) {
+        document.getElementById('loginMsg').innerText = 'Completa todos los campos.';
+        return;
+      }
+      fetch('http://localhost:8080/draftosaurus-project/src/app/models/login.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('loginMsg').innerText = '¡Bienvenido!';
+          setTimeout(() => {
+            closeLoginModal();
+            window.location.href = 'partida.html';
+          }, 1000);
+        } else {
+          document.getElementById('loginMsg').innerText = data.message || 'Credenciales incorrectas.';
+        }
+      })
+      .catch(() => {
+        document.getElementById('loginMsg').innerText = 'No se pudo conectar con el servidor.';
+      });
+    }
     // Objeto con las traducciones por idioma
     const translations = {
       es: {

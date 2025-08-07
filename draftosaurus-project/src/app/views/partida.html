@@ -35,18 +35,20 @@
 <body>
 
   <!-- Fondo de puntitos -->
-  <div class="grid">
-    <!-- Generar 600 puntitos (20 columnas × 30 filas) -->
-    <script>
+  <div class="grid"></div>
+  <script>
+    // Generar 600 puntitos (20 columnas × 30 filas) de forma moderna
+    window.addEventListener('DOMContentLoaded', () => {
+      const grid = document.querySelector('.grid');
       for (let row = 0; row < 30; row++) {
         for (let col = 0; col < 20; col++) {
           const dot = document.createElement('div');
           dot.className = `dot row-${row} col-${col}`;
-          document.write(dot.outerHTML);
+          grid.appendChild(dot);
         }
       }
-    </script>
-  </div>
+    });
+  </script>
   <div class="vignette"></div>
 
   <!-- Contenido centrado -->
