@@ -265,7 +265,7 @@
     }
 
     function confirmConfig() {
-      // Verifica los nombres y guarda los jugadores
+      // Verifica los nombres y envía los jugadores al backend PHP
       const num = parseInt(document.getElementById("numPlayers").value);
       const inputs = document.querySelectorAll('#playerInputs input');
 
@@ -281,12 +281,26 @@
           showAlert(translations[currentLang].errorNames, translations[currentLang].ok);
           return;
         }
-        players.push({ name: name });
+        players.push(name);
       }
 
-      // Guarda en el almacenamiento local y redirige
-      localStorage.setItem('players', JSON.stringify(players));
-      window.location.href = "partida.html";
+      // Enviar datos al backend PHP (ruta absoluta desde la raíz del servidor)
+      fetch('http://localhost:8080/draftosaurus-project/src/app/models/Dinomano.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ players })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = "partida.html";
+        } else {
+          showAlert(data.message || 'Error en el servidor', translations[currentLang].ok);
+        }
+      })
+      .catch(() => {
+        showAlert('No se pudo conectar con el servidor.', translations[currentLang].ok);
+      });
     }
 
     window.onload = function () {

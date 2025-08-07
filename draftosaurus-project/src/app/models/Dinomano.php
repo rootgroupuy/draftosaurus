@@ -1,5 +1,39 @@
 <?php
+// --- API para recibir jugadores desde el front-end ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Content-Type: application/json');
+    $data = json_decode(file_get_contents('php://input'), true);
+    $players = $data['players'] ?? [];
+    if (count($players) < 2 || count($players) > 5) {
+        echo json_encode(['success' => false, 'message' => 'Número de jugadores inválido']);
+        exit;
+    }
+    require_once 'conexion.php';
+    try {
+        $conn = getConexion(); // Debe retornar un objeto PDO
+        $conn->beginTransaction();
+        $inserted = 0;
+        foreach ($players as $name) {
+            $stmt = $conn->prepare('INSERT INTO Jugador (nombre) VALUES (:nombre)');
+            $stmt->bindParam(':nombre', $name);
+            if ($stmt->execute()) {
+                $inserted++;
+            }
+        }
+        $conn->commit();
+        if ($inserted === count($players)) {
+            echo json_encode(['success' => true, 'message' => 'Jugadores guardados correctamente en la base de datos.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'No todos los jugadores se guardaron correctamente.']);
+        }
+    } catch (Exception $e) {
+        if ($conn && $conn->inTransaction()) $conn->rollBack();
+        echo json_encode(['success' => false, 'message' => 'Error al guardar jugadores: ' . $e->getMessage()]);
+    }
+    exit;
+}
 
+// --- Lógica de la clase original ---
 class Dinomano {
     private $dinosaurios = [];
     private $maxDinosauriosPorUsuario = 6;

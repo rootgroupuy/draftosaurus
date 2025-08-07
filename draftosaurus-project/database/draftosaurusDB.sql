@@ -1,3 +1,6 @@
+CREATE DATABASE draftosaurusDB;
+USE draftosaurusDB;
+
 CREATE TABLE Jugador (
     idJugador INT PRIMARY KEY,
     nombre VARCHAR(100),
