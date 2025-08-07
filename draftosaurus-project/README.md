@@ -50,7 +50,7 @@ draftosaurus-project/
 ## Arquitectura del Sistema
 ### Componentes Principales
 - **Dinobolsa**: Gestiona la colección de dinosaurios disponibles
-- **Dinomano**: Controla las cartas en mano de cada jugador
+- **Dinomano**: Controla los dinos en mano de cada jugador
 - **Dinotablero**: Administra el tablero de juego y las zonas
 - **Dinodado**: Implementa la lógica del dado y sus efectos
 
@@ -87,4 +87,4 @@ Desarrollado por Root Group:
 Para preguntas o sugerencias, por favor crear un issue en el repositorio o contactar a rootgroup.uy@protonmail.com.
 
 ---
-© 2023 Root Group - ISBO. Todos los derechos reservados.
+© 2025 Root Group - ISBO. Todos los derechos reservados.
