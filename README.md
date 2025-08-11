@@ -1,4 +1,4 @@
-# Draftosaurus - Juego de Mesa Digital 🦕
+# Draftosaurus - Juego de Mesa Digital
 
 ## Descripción del Proyecto
 Draftosaurus es una adaptación digital del juego de mesa donde los jugadores gestionan su propio parque de dinosaurios. Desarrollado por Root Group para el Instituto Tecnológico Brazo Oriental (ISBO), este proyecto implementa las mecánicas del juego original en una experiencia interactiva multiplataforma.
